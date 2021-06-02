@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block comment %}
+<span class="w3-right" style="padding:0 25%;">** 도서 검색 기록은 수집되어 추천에 영향을 끼칩니다</span>
+<br><br>
+{% endblock %}
+
+{% block alert %}
+{% if alert_msg %}
+  {{ alert_msg }}
+{% endif %}
+{% endblock %}
+
+{% block main_body %}
+<div style="padding:0 10%">
+  <form method="POST" action="/api/book">
+    <div> 
+      <span>도서 검색 :&nbsp;</span>
+      <input name="query" style="margin-bottom:10px; width:396px;" type="text" placeholder="Enter Content" value="{{ query }}">
+    </div>
+    <br>
+    <input type="submit" class="w3-button" value="Search" />
+  </form>
+</div>
+
+<br>
+
+{% if book_list %}
+<div style="padding:0 100px">
+  <table class="w3-table">
+    <thead>
+      <tr>
+        <th scope="col" style="width:10%">Image</th>
+        <th scope="col" style="width:30%">Title</th>
+        <th scope="col" style="width:10%">Author</th>
+        <th scope="col" style="width:10%">Publisher</th>
+        <th scope="col" style="width:10%">MyList Add</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in book_list %}
+      <tr>
+        <td><img width="85px" src="{{ book.image }}"></td>
+        <td><a href="{{ book.link }}">{{ book.title }}</a></td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.publisher }}</td>
+        <td>
+          <a class="w3-button", href='/api/bookadd/{{ book.isbn }}?query={{ query }}'>
+            Add
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+
+{% endblock %}

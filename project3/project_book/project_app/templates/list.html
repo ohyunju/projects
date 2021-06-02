@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block alert %}
+{% endblock %}
+
+{% block main_body  %}
+
+{% if bookMylist %}
+<div style="padding:0 100px">
+  <table class="w3-table">
+    <thead>
+      <tr>
+        <th scope="col" style="width:10%">Image</th>
+        <th scope="col" style="width:30%">Title</th>
+        <th scope="col" style="width:10%">Author</th>
+        <th scope="col" style="width:10%">Publisher</th>
+        <th scope="col" style="width:10%">MyList Del</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bookmy in bookMylist %}
+      <tr style="height:141px">
+        <td><img src="{{ bookmy.image }}"><br></td>
+        <td><a href="{{ bookmy.link }}">{{ bookmy.title }}</a></td>
+        <td>{{ bookmy.author }}</td>
+        <td>{{ bookmy.publisher }}</td>
+        <td>
+          <a class="w3-button", href='/api/bookdel/{{ bookmy.isbn }}'>
+            Delete
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}

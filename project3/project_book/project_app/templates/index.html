@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block alert %}
+{% endblock %}
+
+{% block main_body  %}
+<style>
+td {width: 20%;
+    max-width: 20px;}
+</style>
+
+<div style="padding:0 10%">
+  {% if yes24_bestsell_list %}
+  <table class="w3-table">
+    <thead>
+      <tr>
+        <th colspan="5">YES24 BestSeller</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      {% for yes24_bestsell in yes24_bestsell_list %}
+        <td>
+          <img src="{{ yes24_bestsell.imageLink }}"><br>
+          {{ yes24_bestsell.title }}<br>
+          {{ yes24_bestsell.author }}
+        </td>
+        {% if yes24_bestsell.sell_id%5 == 4 %}
+        </tr>
+        <tr>
+        {% endif %}
+      {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if kyobo_bestsell_list %}
+  <table class="w3-table">
+    <thead>
+      <tr>
+        <th colspan="5">교보문고 BestSeller</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr></tr>
+      {% for kyobo_bestsell in kyobo_bestsell_list %}
+        <td>
+          <img src="{{ kyobo_bestsell.imageLink }}"><br>
+          {{ kyobo_bestsell.title }}<br>
+          {{ kyobo_bestsell.author }}
+        </td>
+        {% if kyobo_bestsell.sell_id%5 == 4 %}
+        </tr>
+        <tr>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if aladdin_bestsell_list %}
+  <table class="w3-table">
+    <thead>
+      <tr>
+        <th colspan="5">알라딘 BestSeller</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      {% for aladdin_bestsell in aladdin_bestsell_list %}
+        <td>
+          <img src="{{ aladdin_bestsell.imageLink }}"><br>
+          {{ aladdin_bestsell.title }}<br>
+          {{ aladdin_bestsell.author }}
+        </td>
+        {% if aladdin_bestsell.sell_id%5 == 4 %}
+        </tr>
+        <tr>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

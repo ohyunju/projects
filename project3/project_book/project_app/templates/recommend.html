@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block main_body  %}
+<form method="POST" action="/compare">
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">MyList :&nbsp;&nbsp;</label>
+    <select name="mylist" class="form-control" id="exampleFormControlSelect1" style="max-width:550px;">
+      {% for mylist in bookMylist %}
+      <option value={{mylist.isbn}} {% if mylist.isbn == mylist_isbn %} selected {% endif %}>{{mylist.title}}</option>
+      {% endfor %}
+    </select>
+    &nbsp;&nbsp;
+  <input type="submit" class="w3-button" value="Recommand" />
+  </div>
+</form>
+
+<br><br><br>
+
+{% if result_list %}
+<div style="padding:0 150px">
+  <table class="w3-table">
+    <tr>
+      <td width="160px" rowspan="4"><img width="150px" src="{{ result_list.image }}"></td>
+      <th width="80px" style="text-align:center;">제목</th>
+      <td colspan="3"><a href="{{ result_list.link }}">{{ result_list.title }}</a></td>
+    </tr>
+    <tr>
+      <th width="80px" style="text-align:center;">저자</th>
+      <td width="200px">{{ result_list.author }}</td> 
+      <th width="100px" style="text-align:center;">출판사</th>
+      <td>{{ result_list.publisher }}</td>
+    </tr>  
+    <tr>  
+      <th width="80px" style="text-align:center;">설명</th>
+      <td colspan="3">{{ result_list.description }}</td>
+    </tr>
+  </table>
+</div>
+{% endif %}
+
+{% endblock  %}
